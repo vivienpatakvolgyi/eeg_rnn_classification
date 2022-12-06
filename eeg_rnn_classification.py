@@ -48,7 +48,8 @@ if 'a)' in train_test:
         X_val, y_val = methods.append_time_series(df)
         generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
         
-
+        st.markdown("""---""")
+        
         X_predict = []
         y_predict = []
         for i in range(len(generator_2)):
@@ -66,9 +67,10 @@ elif 'b)' in train_test:
 
     st.write('This is one item of the batch of features:')
     st.write(X_predict[1][0])
-    st.write(f'And this label that goes with it:{y_predict[1][0]}')
+    st.write(f'And this label that goes with it: {y_predict[1][0]}')
     st.write(f'An element contains {len(X_predict[1])} such (15 x 112) bundles of data (this is the batch size).')
     
+    st.markdown("""---""")
 
     methods.predict(X_predict, y_predict, 'RNN-random.h5')
 
