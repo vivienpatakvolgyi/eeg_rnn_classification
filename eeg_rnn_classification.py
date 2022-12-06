@@ -32,7 +32,7 @@ if 'a)' in train_test:
     if uploaded_file:
         item = uploaded_file.getvalue()
         scaler = StandardScaler()
-        cols = df[['Class', 'UserId']]
+        cols = item[['Class', 'UserId']]
         df = pd.DataFrame(scaler.fit_transform(df.drop(['Class', 'UserId'], axis = 1)),columns=df.columns.drop(['Class', 'UserId']))
         df[['Class', 'UserId']] =cols[['Class', 'UserId']]
             
