@@ -28,6 +28,11 @@ def append_time_series(df):
     X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
     label=df.values[i+size][-2:-1].astype(float)
     Y.append(float(label))
+    
+  X= np.array(X)
+  Y= np.array(Y)
+  
+  return X, Y
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
