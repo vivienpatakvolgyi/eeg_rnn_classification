@@ -111,8 +111,37 @@ elif 'b)' in train_test:
     st.write('Sadly, in this case, we don\'t have the data in csv, because it was from separation during the data processing. However, I\'m going to show you the processed data structure right before we use it for prediction. In option a), after data processing, we\'ll have the same structure but different values. This data is only 20% of the full dataset and it was selected randomly from all users time series data as sequences. In option a), we used 25% of the full dataset for prediction and it\'s from an entirely different user than the ones we used for training.')
     X_val = pickle.load( open( "validation_data_X", "rb" ) )
     y_val = pickle.load( open( "validation_data_y", "rb" ) )
+    generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
+    X_predict = []
+    y_predict = []
+    for i in range(len(generator_2)):
+        X_predict.append(generator_2[i][0])
+        y_predict.append(generator_2[i][1])
 
-    st.write(y_val)
+    model = load_model('RNN_3of4.h5')
+
+    predicted_vals = []
+
+
+    for i in range(len(X_predict)):
+        pred_test = model.predict(X_predict[i])[-1]
+        predicted_vals.append(pred_test)
+
+    true = []
+    prediction = []
+
+    correct = 0
+    for i in range(len(predicted_vals)):
+        prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
+        true.append(int(y_predict[i][-1]))
+        if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
+            correct += 1
+
+    st.write("Correct predictions: ", "{:.0%}".format(correct/90))
+
+    
+    show_results(true, prediction)
+    MSE_R(true, prediction)
 
 
     st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
