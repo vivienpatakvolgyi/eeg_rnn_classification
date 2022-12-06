@@ -42,6 +42,12 @@ def MSE_R(true, prediction):
     result = metric.result()
     st.write(f"R\u00B2: %.3f" % result.numpy())
 
+def show_results(true, prediction):
+    results = pd.DataFrame()
+    results['Prediction'] = prediction
+    results['True value'] = true
+    st.write(results)
+
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
@@ -93,14 +99,8 @@ if 'a)' in train_test:
 
         st.write("Correct predictions: ", "{:.0%}".format(correct/90))
 
-        results = pd.DataFrame()
-        results['Prediction'] = prediction
-        results['True value'] = true
-        st.write(results)
         
-
-
-        
+        show_results(true, prediction)
         MSE_R(true, prediction)
   
             
