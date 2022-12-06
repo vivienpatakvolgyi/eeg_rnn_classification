@@ -96,7 +96,7 @@ if 'a)' in train_test:
         metric = tfa.metrics.r_square.RSquare()
         metric.update_state(np.array(true), np.array(prediction))
         result = metric.result()
-        st.write(f"R\u00B2: {"%.3f" % result.numpy()}")
+        st.write(f"R\u00B2: %.3f" % result.numpy())
 
   
 
