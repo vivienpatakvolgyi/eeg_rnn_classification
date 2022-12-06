@@ -25,10 +25,9 @@ def append_time_series(df):
   size= 1
   #df_y= df_y.drop('UserId', axis =1)
   for i in range(0,len(df)-size, 1):
-    if df.UserId[i] == df.UserId[i+size]:
-      X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
-      label=df.values[i+size][-2:-1].astype(float)
-      Y.append(float(label))
+    X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
+    label=df.values[i+size][-2:-1].astype(float)
+    Y.append(float(label))
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
