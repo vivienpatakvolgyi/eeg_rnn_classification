@@ -62,7 +62,7 @@ elif 'b)' in train_test:
     X_predict = pickle.load( open( "validation_data_X", "rb" ) )
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
-    mathods.predict(X_predict, y_predict, 'RNN-random.h5')
+    methods.predict(X_predict, y_predict, 'RNN-random.h5')
 
 
     st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
