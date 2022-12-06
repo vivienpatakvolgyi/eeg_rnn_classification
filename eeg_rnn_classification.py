@@ -57,8 +57,8 @@ if 'a)' in train_test:
         X_predict = []
         y_predict = []
         for i in range(len(generator_2)):
-        X_predict.append(generator_2[i][0])
-        y_predict.append(generator_2[i][1])
+            X_predict.append(generator_2[i][0])
+            y_predict.append(generator_2[i][1])
 
         model = load_model('RNN_3of4.h5')
 
