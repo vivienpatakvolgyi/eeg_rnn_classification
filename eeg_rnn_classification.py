@@ -24,7 +24,7 @@ import methods
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
-with open('user_d.csv', 'rb') as f:
+with open('Presentation.pptx', 'rb') as f:
         st.download_button('Download presentation', f, file_name='Presentation.pptx')
 
 train_test = st.radio(
@@ -65,9 +65,9 @@ elif 'b)' in train_test:
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
     st.write('This is one item of the features:')
-    st.write(X_predict[1])
+    st.write(X_predict[1][0])
     st.write('And these are the related labels:')
-    st.write(y_predict[1])
+    st.write(y_predict[1][0])
     
 
     methods.predict(X_predict, y_predict, 'RNN-random.h5')
