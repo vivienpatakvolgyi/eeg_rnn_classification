@@ -33,7 +33,7 @@ if results:
         uploaded_file = st.file_uploader("Upload csv file", type=".csv")
         if uploaded_file:
             item = pd.read_csv(uploaded_file)
-        st.write(item)
+        st.write(str(item))
     
     
     elif 'b)' in train_test:
