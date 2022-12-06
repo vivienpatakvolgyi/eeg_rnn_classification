@@ -48,8 +48,9 @@ def show_results(true, prediction):
     results['True value'] = true
     st.write(results)
 
-def predict(X_predict, y_predict, file):
-    model = load_model(file)
+def predict(X_predict, y_predict, file = ''):
+    fname = file
+    model = load_model(fname)
 
     predicted_vals = []
 
