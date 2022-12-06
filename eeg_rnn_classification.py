@@ -83,7 +83,7 @@ if 'a)' in train_test:
             if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
                 correct += 1
 
-        st.write("Correct predictions: ", "{:.0%}".format(correct/90), "%")
+        st.write("Correct predictions: ", "{:.0%}".format(correct/90))
 
         results = pd.DataFrame()
         results['Prediction'] = prediction
@@ -96,7 +96,7 @@ if 'a)' in train_test:
         metric = tfa.metrics.r_square.RSquare()
         metric.update_state(np.array(true), np.array(prediction))
         result = metric.result()
-        st.write("R^2: ", result.numpy())
+        st.write(f"R'\U+00B2': ", result.numpy())
 
   
 
