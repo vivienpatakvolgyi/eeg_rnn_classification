@@ -66,18 +66,18 @@ if 'a)' in train_test:
 
 
         for i in range(len(X_predict)):
-        pred_test = model.predict(X_predict[i])[-1]
-        predicted_vals.append(pred_test)
+            pred_test = model.predict(X_predict[i])[-1]
+            predicted_vals.append(pred_test)
 
         true = []
         prediction = []
 
         correct = 0
         for i in range(len(predicted_vals)):
-        prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
-        true.append(y_predict[i][-1])
-        if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
-            correct += 1
+            prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
+            true.append(y_predict[i][-1])
+            if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
+                correct += 1
 
         st.write(correct/90)
 
