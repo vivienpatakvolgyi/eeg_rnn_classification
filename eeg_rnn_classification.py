@@ -68,7 +68,7 @@ elif 'b)' in train_test:
     st.write(X_predict[1][0])
     st.write('And this label that goes with it:')
     st.write(y_predict[1][0])
-    st.write(f'An element contains {len(X_predict[1])} such data sets')
+    st.write(f'An element contains {len(X_predict[1])} such (15 x 112) data sets (batch size).')
     
 
     methods.predict(X_predict, y_predict, 'RNN-random.h5')
