@@ -19,7 +19,7 @@ from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_squared_error
 import tensorflow_addons as tfa
 import pickle
-using methods.py
+import methods
 
 
 st.title('RNN classification with EEG data')
@@ -53,7 +53,7 @@ if 'a)' in train_test:
             X_predict.append(generator_2[i][0])
             y_predict.append(generator_2[i][1])
 
-        predict(X_predict, y_predict, 'RNN_3of4.h5')
+        methods.predict(X_predict, y_predict, 'RNN_3of4.h5')
   
             
 elif 'b)' in train_test:
@@ -62,7 +62,7 @@ elif 'b)' in train_test:
     X_predict = pickle.load( open( "validation_data_X", "rb" ) )
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
-    predict(X_predict, y_predict, 'RNN-random.h5')
+    mathods.predict(X_predict, y_predict, 'RNN-random.h5')
 
 
     st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
