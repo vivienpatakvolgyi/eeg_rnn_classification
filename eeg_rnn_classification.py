@@ -18,6 +18,7 @@ from keras.preprocessing.sequence import TimeseriesGenerator
 from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_squared_error
 import tensorflow_addons as tfa
+import pickle
 
 def append_time_series(df):
   X = []
