@@ -31,8 +31,9 @@ if results:
         with open('user_d.csv', 'rb') as f:
             st.download_button('Download csv file', f, file_name='user_d.csv')
         uploaded_file = st.file_uploader("Upload csv file", type=".csv")
-        item = pd.read_csv(uploaded_file)
-        df = df.append(item, ignore_index = True)
+        if uploaded_file:
+            item = pd.read_csv(uploaded_file)
+        st.write(item)
     
     
     elif 'b)' in train_test:
