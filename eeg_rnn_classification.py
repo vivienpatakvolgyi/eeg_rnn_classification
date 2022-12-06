@@ -57,7 +57,8 @@ if 'a)' in train_test:
             X_predict.append(generator_2[i][0])
             y_predict.append(generator_2[i][1])
 
-        methods.predict(X_predict, y_predict, 'RNN_3of4.h5')
+        with st.spinner('Running predictions...'):
+            methods.predict(X_predict, y_predict, 'RNN_3of4.h5')
   
             
 elif 'b)' in train_test:
