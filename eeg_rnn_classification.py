@@ -56,7 +56,6 @@ if 'a)' in train_test:
         df['Class'] =cols
         
         X_val, y_val = append_time_series(df)
-        st.write(y_val)
         generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
 
         X_predict = []
@@ -84,7 +83,7 @@ if 'a)' in train_test:
             if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
                 correct += 1
 
-        st.write(correct/90)
+        st.write("Percentage of correct predictions: ", 100*(correct/90))
 
         results = pd.DataFrame()
         results['Prediction'] = prediction
