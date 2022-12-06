@@ -26,7 +26,7 @@ def append_time_series(df):
   #df_y= df_y.drop('UserId', axis =1)
   for i in range(0,len(df)-size, 1):
     X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
-    label=df.values[i+size][-2:-1].astype(float)
+    label=df.values[i+size][-1].astype(float)
     Y.append(float(label))
     
   X= np.array(X)
