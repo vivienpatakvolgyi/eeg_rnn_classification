@@ -14,6 +14,21 @@ from keras.layers import Reshape
 from numpy import mean
 from numpy import std
 from sklearn.preprocessing import StandardScaler
+from keras.preprocessing.sequence import TimeseriesGenerator
+from tensorflow.keras.models import load_model
+from sklearn.metrics import mean_squared_error
+import tensorflow_addons as tfa
+
+def append_time_series(df):
+  X = []
+  Y = []
+  size= 1
+  #df_y= df_y.drop('UserId', axis =1)
+  for i in range(0,len(df)-size, 1):
+    if df.UserId[i] == df.UserId[i+size]:
+      X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
+      label=df.values[i+size][-2:-1].astype(float)
+      Y.append(float(label))
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
@@ -32,10 +47,49 @@ if 'a)' in train_test:
     if uploaded_file:
         item = pd.DataFrame(pd.read_csv(uploaded_file))
         scaler = StandardScaler()
-        st.write(item['Class', 'UserId'])
-        cols = item['Class', 'UserId']
-        df = pd.DataFrame(scaler.fit_transform(df.drop(['Class', 'UserId'], axis = 1)),columns=df.columns.drop(['Class', 'UserId']))
-        df[['Class', 'UserId']] =cols[['Class', 'UserId']]
+        st.write(item['Class'])
+        cols = item['Class']
+        df = pd.DataFrame(scaler.fit_transform(df.drop(['Class'], axis = 1)),columns=df.columns.drop(['Class']))
+        df[['Class']] =cols[['Class']]
+        X_val, y_val = append_time_series(df)
+        generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
+
+        X_predict = []
+        y_predict = []
+        for i in range(len(generator_2)):
+        X_predict.append(generator_2[i][0])
+        y_predict.append(generator_2[i][1])
+
+        model = load_model('RNN_3of4.h5')
+
+        predicted_vals = []
+
+
+        for i in range(len(X_predict)):
+        pred_test = model.predict(X_predict[i])[-1]
+        predicted_vals.append(pred_test)
+
+        true = []
+        prediction = []
+
+        correct = 0
+        for i in range(len(predicted_vals)):
+        prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
+        true.append(y_predict[i][-1])
+        if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
+            correct += 1
+
+        st.write(correct/90)
+
+        
+        st.write("MSE: ", mean_squared_error(true, prediction))
+        metric = tfa.metrics.r_square.RSquare()
+        metric.update_state(np.array(true), np.array(prediction))
+        result = metric.result()
+        st.write("R^2: ", result.numpy())
+
+  
+
             
         
 
