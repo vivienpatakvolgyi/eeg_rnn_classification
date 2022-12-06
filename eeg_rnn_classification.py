@@ -30,7 +30,7 @@ if 'a)' in train_test:
         st.download_button('Download csv file', f, file_name='user_d.csv')
     uploaded_file = st.file_uploader("Upload csv file", type=".csv")
     if uploaded_file:
-        item = uploaded_file.getvalue()
+        item = pd.read_csv(uploaded_file)
         scaler = StandardScaler()
         cols = item[['Class', 'UserId']]
         df = pd.DataFrame(scaler.fit_transform(df.drop(['Class', 'UserId'], axis = 1)),columns=df.columns.drop(['Class', 'UserId']))
