@@ -92,11 +92,11 @@ if 'a)' in train_test:
         
 
         
-        st.write("MSE: ", mean_squared_error(true, prediction))
+        st.write(f"MSE: {mean_squared_error(true, prediction)}")
         metric = tfa.metrics.r_square.RSquare()
         metric.update_state(np.array(true), np.array(prediction))
         result = metric.result()
-        st.write("R\u00B2: ", result.numpy())
+        st.write(f"R\u00B2: {result.numpy()}")
 
   
 
