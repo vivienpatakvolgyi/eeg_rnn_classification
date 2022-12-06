@@ -19,7 +19,7 @@ from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_squared_error
 import tensorflow_addons as tfa
 import pickle
-import methods.py
+using methods.py
 
 
 st.title('RNN classification with EEG data')
