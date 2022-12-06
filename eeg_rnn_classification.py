@@ -50,6 +50,7 @@ if 'a)' in train_test:
         st.write(item['Class'])
         cols = item['Class']
         df = pd.DataFrame(scaler.fit_transform(item.drop(['Class'], axis = 1)),columns=item.columns.drop(['Class']))
+        st.write(df)
         df['Class'] =cols['Class']
         X_val, y_val = append_time_series(df)
         generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
