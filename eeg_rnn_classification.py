@@ -99,7 +99,7 @@ if 'a)' in train_test:
             if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
                 correct += 1
 
-        st.write("Correct predictions: ", "{:.0%}".format(correct/90))
+        st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
 
         
         show_results(true, prediction)
@@ -118,7 +118,6 @@ elif 'b)' in train_test:
 
     predicted_vals = []
 
-
     for i in range(len(X_predict)):
         pred_test = model.predict(X_predict[i])[-1]
         predicted_vals.append(pred_test)
@@ -133,7 +132,7 @@ elif 'b)' in train_test:
         if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
             correct += 1
 
-    st.write("Correct predictions: ", "{:.0%}".format(correct/90))
+    st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
 
     
     show_results(true, prediction)
