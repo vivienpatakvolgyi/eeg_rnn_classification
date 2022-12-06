@@ -71,6 +71,7 @@ if 'a)' in train_test:
         
         X_val, y_val = append_time_series(df)
         generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
+        st.write(X_val)
 
         X_predict = []
         y_predict = []
