@@ -64,10 +64,11 @@ elif 'b)' in train_test:
     X_predict = pickle.load( open( "validation_data_X", "rb" ) )
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
-    st.write('This is one item of the features:')
+    st.write('This is one item of the batch of features:')
     st.write(X_predict[1][0])
-    st.write('And these are the related labels:')
+    st.write('And this label that goes with it:')
     st.write(y_predict[1][0])
+    st.write(f'An element contains {len(X_predict[1])} such data sets')
     
 
     methods.predict(X_predict, y_predict, 'RNN-random.h5')
