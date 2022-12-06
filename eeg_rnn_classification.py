@@ -85,6 +85,11 @@ if 'a)' in train_test:
 
         st.write(correct/90)
 
+        results = pd.DataFrame()
+        results['Prediction'] = prediction
+        results['True value'] = true
+        st.write(results)
+
         
         st.write("MSE: ", mean_squared_error(true, prediction))
         metric = tfa.metrics.r_square.RSquare()
