@@ -39,7 +39,7 @@ if results:
         if st.session_state.uploaded:
             item = pd.read_csv(uploaded_file)
             st.write('asd')
-    
+        st.write(item.name)
     
     elif 'b)' in train_test:
         st.write('You chosed the B option. [Open original notebook](https://colab.research.google.com/drive/1JWahgKnkjCOrddkxIRy8vpQqH4QXnSkY?usp=sharing)')
