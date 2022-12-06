@@ -30,7 +30,9 @@ if results:
         st.write('In this case, you can upload the fourth user\'s data in csv. You can download and see the original data I used for this project. After downloading the original .csv file, please drag and drop it here to start the prediction and see the results.')
         with open('user_d.csv', 'rb') as f:
             st.download_button('Download csv file', f, file_name='user_d.csv')
-    
+        uploaded_file = st.file_uploader("Upload csv file", type=".csv")
+        item = pd.read_csv(uploaded_file)
+        df = df.append(item, ignore_index = True)
     
     
     elif 'b)' in train_test:
@@ -39,5 +41,3 @@ if results:
         
         st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
 
-uploaded_file = st.file_uploader("Upload CSV", type=".csv")
-st.write(uploaded_file)
