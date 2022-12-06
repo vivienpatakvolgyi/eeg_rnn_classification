@@ -14,9 +14,6 @@ from keras.layers import Reshape
 from numpy import mean
 from numpy import std
 
-if 'uploaded' not in st.session_state:
-    st.session_state.uploaded = False
-
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
@@ -32,11 +29,13 @@ if 'a)' in train_test:
         st.download_button('Download csv file', f, file_name='user_d.csv')
     uploaded_file = st.file_uploader("Upload csv file", type=".csv")
     if uploaded_file:
-        st.session_state.uploaded = True
-    if st.session_state.uploaded:
         item = pd.read_csv(uploaded_file)
-        st.write('asd')
-    st.write(item.name)
+        scaler = StandardScaler()
+        cols = df[['Class', 'UserId']]
+        df = pd.DataFrame(scaler.fit_transform(df.drop(['Class', 'UserId'], axis = 1)),columns=df.columns.drop(['Class', 'UserId']))
+        df[['Class', 'UserId']] =cols[['Class', 'UserId']]
+            
+        
 
 elif 'b)' in train_test:
     st.write('You chosed the B option. [Open original notebook](https://colab.research.google.com/drive/1JWahgKnkjCOrddkxIRy8vpQqH4QXnSkY?usp=sharing)')
