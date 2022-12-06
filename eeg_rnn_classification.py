@@ -11,7 +11,7 @@ train_test = st.radio(
 results = st.button('Show results', key='res')
 
 if results: 
-    st.write(int(train_test))
+    st.write(str(train_test))
     if train_test == 0:
         st.write('You chosed the A option')
     elif train_test == 1:
