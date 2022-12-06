@@ -14,9 +14,9 @@ results = st.button('Show results', key='res')
 if results: 
 
     if 'a)' in train_test:
-        st.write('You chosed the A option')
+        st.write('You chosed the A option. [Open original notebook](https://colab.research.google.com/drive/1wMTgQV1En_W1eQONhEyipMb2i9EmIbZ4?usp=sharing)')
     elif 'b)' in train_test:
-        st.write('You chosed the B option')
+        st.write('You chosed the B option. [Open original notebook](https://colab.research.google.com/drive/1JWahgKnkjCOrddkxIRy8vpQqH4QXnSkY?usp=sharing)')
         
 
 uploaded_file = st.file_uploader("Upload CSV", type=".csv")
