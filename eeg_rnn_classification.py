@@ -3,10 +3,11 @@ import pandas as pd
 import numpy as np
 
 st.title('RNN classification with EEG data')
+st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
 train_test = st.radio(
     "I used two different approaches, each has different outcome, so please select which one you want to use for prediction:",
-    ('a) We train the model on the data of three of the four users and predict on the remaining 1', 'b) The data used for prediction are randomly selected from the time series data'))
+    ('a) We train the model on the data of three of the four users and predict on the remaining 1', 'b) The data used for prediction or training are randomly selected from the time series data'))
 
 results = st.button('Show results', key='res')
 
