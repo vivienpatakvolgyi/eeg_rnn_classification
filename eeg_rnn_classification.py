@@ -24,6 +24,8 @@ import methods
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
+with open('user_d.csv', 'rb') as f:
+        st.download_button('Download presentation', f, file_name='Presentation.pptx')
 
 train_test = st.radio(
     "I used two different approaches, each has different outcome, so please select which one you want to use for prediction:",
@@ -62,8 +64,13 @@ elif 'b)' in train_test:
     X_predict = pickle.load( open( "validation_data_X", "rb" ) )
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
-    methods.predict(X_predict, y_predict, 'RNN-random.h5')
+    st.write('This is one item of the features:')
+    st.write(X_predict[1])
+    st.write('And these are the related labels:')
+    st.write(y_predict[1])
+    
 
+    methods.predict(X_predict, y_predict, 'RNN-random.h5')
 
     st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
 
