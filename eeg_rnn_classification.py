@@ -89,7 +89,7 @@ if 'a)' in train_test:
         results['Prediction'] = prediction
         results['True value'] = true
         st.write(results)
-        st.write(X_predict)
+        st.write(y_predict)
 
         
         st.write("MSE: ", mean_squared_error(true, prediction))
