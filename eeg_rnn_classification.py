@@ -48,6 +48,30 @@ def show_results(true, prediction):
     results['True value'] = true
     st.write(results)
 
+def predict(X_predict, y_predict, file):
+    model = load_model(file)
+
+    predicted_vals = []
+
+    for i in range(len(X_predict)):
+        pred_test = model.predict(X_predict[i])[-1]
+        predicted_vals.append(pred_test)
+
+    true = []
+    prediction = []
+
+    correct = 0
+    for i in range(len(predicted_vals)):
+        prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
+        true.append(int(y_predict[i][-1]))
+        if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
+            correct += 1
+
+    st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
+
+    
+    show_results(true, prediction)
+    MSE_R(true, prediction)
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
@@ -78,7 +102,6 @@ if 'a)' in train_test:
         for i in range(len(generator_2)):
             X_predict.append(generator_2[i][0])
             y_predict.append(generator_2[i][1])
-        st.write(y_predict)
 
         model = load_model('RNN_3of4.h5')
 
@@ -114,32 +137,7 @@ elif 'b)' in train_test:
     X_predict = pickle.load( open( "validation_data_X", "rb" ) )
     y_predict = pickle.load( open( "validation_data_y", "rb" ) )
 
-    def predict(X_predict, y_predict):
-        model = load_model('RNN_3of4.h5')
-
-        predicted_vals = []
-
-        for i in range(len(X_predict)):
-            pred_test = model.predict(X_predict[i])[-1]
-            predicted_vals.append(pred_test)
-
-        true = []
-        prediction = []
-
-        correct = 0
-        for i in range(len(predicted_vals)):
-            prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
-            true.append(int(y_predict[i][-1]))
-            if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
-                correct += 1
-
-        st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
-
-        
-        show_results(true, prediction)
-        MSE_R(true, prediction)
-        
-    predict(X_predict, y_predict)
+    predict(X_predict, y_predict, 'RNN_random.h5')
 
 
     st.write('As you can see, the rate of correctly predicted values ​​is higher in this case, while in the first case we get a value of around 30%, which means that the prediction efficiency is the same as random guessing (considering that we have three categories).')
