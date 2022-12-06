@@ -13,6 +13,7 @@ from keras.layers import LSTM
 from keras.layers import Reshape
 from numpy import mean
 from numpy import std
+from sklearn.preprocessing import StandardScaler
 
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
