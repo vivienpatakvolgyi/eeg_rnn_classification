@@ -66,8 +66,7 @@ elif 'b)' in train_test:
 
     st.write('This is one item of the batch of features:')
     st.write(X_predict[1][0])
-    st.write('And this label that goes with it:')
-    st.write(y_predict[1][0])
+    st.write(f'And this label that goes with it:{y_predict[1][0]}')
     st.write(f'An element contains {len(X_predict[1])} such (15 x 112) bundles of data (this is the batch size).')
     
 
