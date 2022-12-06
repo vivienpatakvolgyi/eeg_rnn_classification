@@ -79,11 +79,11 @@ if 'a)' in train_test:
         correct = 0
         for i in range(len(predicted_vals)):
             prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
-            true.append(y_predict[i][-1])
+            true.append(int(y_predict[i][-1]))
             if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
                 correct += 1
 
-        st.write("Correct predictions: ", 100*(correct/90), "%")
+        st.write("Correct predictions: ", "{:.0%}".format(correct/90), "%")
 
         results = pd.DataFrame()
         results['Prediction'] = prediction
