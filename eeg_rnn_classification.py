@@ -31,6 +31,7 @@ train_test = st.radio(
     "I used two different approaches, each has different outcome, so please select which one you want to use for prediction:",
     ('a) We train the model on the data of three of the four users and predict on the remaining 1', 'b) The data used for prediction or training are randomly selected from the time series data'))
 
+st.markdown("""---""")
 
 if 'a)' in train_test:
     st.write('You chosed the A option. [Open original notebook](https://colab.research.google.com/drive/1wMTgQV1En_W1eQONhEyipMb2i9EmIbZ4?usp=sharing)')
@@ -49,7 +50,7 @@ if 'a)' in train_test:
         generator_2 = TimeseriesGenerator(X_val, y_val, length=15, batch_size=32, shuffle = True)
         
         st.markdown("""---""")
-        
+
         X_predict = []
         y_predict = []
         for i in range(len(generator_2)):
