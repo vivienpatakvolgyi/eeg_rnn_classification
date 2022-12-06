@@ -19,60 +19,9 @@ from tensorflow.keras.models import load_model
 from sklearn.metrics import mean_squared_error
 import tensorflow_addons as tfa
 import pickle
+import methods.py
 
-def append_time_series(df):
-  X = []
-  Y = []
-  size= 1
-  #df_y= df_y.drop('UserId', axis =1)
-  for i in range(0,len(df)-size, 1):
-    X.append(np.array(df[i:i+size].drop(df.columns[112:], axis =1)).reshape(112))
-    label=df.values[i+size][-1].astype(float)
-    Y.append(float(label))
-    
-  X= np.array(X)
-  Y= np.array(Y)
-  
-  return X, Y
 
-def MSE_R(true, prediction):
-    st.write(f"MSE: %.3f" % mean_squared_error(true, prediction))
-    metric = tfa.metrics.r_square.RSquare()
-    metric.update_state(np.array(true), np.array(prediction))
-    result = metric.result()
-    st.write(f"R\u00B2: %.3f" % result.numpy())
-
-def show_results(true, prediction):
-    results = pd.DataFrame()
-    results['Prediction'] = prediction
-    results['True value'] = true
-    st.write(results)
-
-def predict(X_predict, y_predict, file = ''):
-    fname = file
-    model = load_model(fname)
-
-    predicted_vals = []
-
-    for i in range(len(X_predict)):
-        pred_test = model.predict(X_predict[i])[-1]
-        predicted_vals.append(pred_test)
-
-    true = []
-    prediction = []
-
-    correct = 0
-    for i in range(len(predicted_vals)):
-        prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
-        true.append(int(y_predict[i][-1]))
-        if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
-            correct += 1
-
-    st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
-
-    
-    show_results(true, prediction)
-    MSE_R(true, prediction)
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
@@ -104,34 +53,9 @@ if 'a)' in train_test:
             X_predict.append(generator_2[i][0])
             y_predict.append(generator_2[i][1])
 
-        model = load_model('RNN_3of4.h5')
-
-        predicted_vals = []
-
-
-        for i in range(len(X_predict)):
-            pred_test = model.predict(X_predict[i])[-1]
-            predicted_vals.append(pred_test)
-
-        true = []
-        prediction = []
-
-        correct = 0
-        for i in range(len(predicted_vals)):
-            prediction.append(list(predicted_vals[i]).index(max(predicted_vals[i])))
-            true.append(int(y_predict[i][-1]))
-            if int(list(predicted_vals[i]).index(max(predicted_vals[i]))) == int(y_predict[i][-1]):
-                correct += 1
-
-        st.write("Correct predictions: ", "{:.0%}".format(correct/len(true)))
-
-        
-        show_results(true, prediction)
-        MSE_R(true, prediction)
+        predict(X_predict, y_predict, 'RNN_3of4.h5')
   
             
-        
-
 elif 'b)' in train_test:
     st.write('You chosed the B option. [Open original notebook](https://colab.research.google.com/drive/1JWahgKnkjCOrddkxIRy8vpQqH4QXnSkY?usp=sharing)')
     st.write('Sadly, in this case, we don\'t have the data in csv, because it was from separation during the data processing. However, I\'m going to show you the processed data structure right before we use it for prediction. In option a), after data processing, we\'ll have the same structure but different values. This data is only 20% of the full dataset and it was selected randomly from all users time series data as sequences. In option a), we used 25% of the full dataset for prediction and it\'s from an entirely different user than the ones we used for training.')
