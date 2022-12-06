@@ -35,6 +35,13 @@ def append_time_series(df):
   
   return X, Y
 
+def MSE_R(true, prediction):
+    st.write(f"MSE: %.3f" % mean_squared_error(true, prediction))
+    metric = tfa.metrics.r_square.RSquare()
+    metric.update_state(np.array(true), np.array(prediction))
+    result = metric.result()
+    st.write(f"R\u00B2: %.3f" % result.numpy())
+
 st.title('RNN classification with EEG data')
 st.write("The original dataset is available from [here](https://www.kaggle.com/datasets/fabriciotorquato/eeg-data-from-hands-movement)")
 
@@ -92,15 +99,10 @@ if 'a)' in train_test:
         st.write(results)
         
 
+
         
-        st.write(f"MSE: %.3f" % mean_squared_error(true, prediction))
-        metric = tfa.metrics.r_square.RSquare()
-        metric.update_state(np.array(true), np.array(prediction))
-        result = metric.result()
-        st.write(f"R\u00B2: %.3f" % result.numpy())
-
+        MSE_R(true, prediction)
   
-
             
         
 
