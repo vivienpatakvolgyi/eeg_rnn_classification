@@ -45,10 +45,10 @@ if 'a)' in train_test:
         st.download_button('Download csv file', f, file_name='user_d.csv')
     uploaded_file = st.file_uploader("Upload csv file", type=".csv")
     if uploaded_file:
-        item = pd.DataFrame(pd.read_csv(uploaded_file))
+        df = pd.DataFrame(pd.read_csv(uploaded_file))
         scaler = StandardScaler()
-        st.write(item['Class'])
-        cols = item['Class']
+        st.write(df['Class'])
+        cols = df['Class']
         df = pd.DataFrame(scaler.fit_transform(df.drop(['Class'], axis = 1)),columns=df.columns.drop(['Class']))
         df[['Class']] =cols[['Class']]
         X_val, y_val = append_time_series(df)
